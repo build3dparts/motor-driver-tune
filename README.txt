@@ -5,9 +5,7 @@ in order to fine adjust the head movement on the fly, based on what is printing.
 So we're trying to auto-calibrate the printing process and motors speed related to a printed model and it's
 characteristics at print time
 
-For example you wold like to print at maximum speed when printing straight lines and the same time you would
-like to reduce the speed when printing curves and corners. The overall result will be an improved printing speed 
-without lowering the print quality
+For example you wold like to print at maximum speed when printing straight lines and the same time you would like to reduce the speed when printing curves and corners. The overall result will be an improved printing speed without lowering the print quality
 
 -------------------------------------------------------------------------------------------------------
 
