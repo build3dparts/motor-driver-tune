@@ -9,7 +9,7 @@ For example you wold like to print at maximum speed when printing straight lines
 like to reduce the speed when printing curves and corners. The overall result will be an improved printing speed 
 without lowering the print quality
 
----------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 At the moment the project consists of 3 parts
 - Serial_Updater - a project developed with VC2015, which is a communication interface between an ARM processor and a GUI application
