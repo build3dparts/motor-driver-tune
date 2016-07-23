@@ -35,8 +35,9 @@ int password[6]={'0','0','0','0','0','0'};   // parola este defapt NARCIS scris 
 
 extern vu16 adc_vals[2];
 
-int pwm_facto;
-int pwm_freq;
+int pwm_procent=50;
+int pwm_frecventa=30000;
+int steptime=1000;
 
 //-----------------------------------------------callback tastatura virtuala predefinita--------------------------------------------------------------------
 void mini_predefined_keyboard(void *interfata)
@@ -828,6 +829,9 @@ stepsrev:3200!  4
 stepssec:nr!    5
 pwmfrequ:nr!    6
 pwmfacto:nr!    7
+startpwm!				8
+stoppwm!				9			
+singlestep!			10
 */
 int GetCMD(int *nr)
 {
@@ -866,7 +870,7 @@ int GetCMD(int *nr)
 						return 4;
 				}		
 				
-				if (!strncmp(buf,"stepssec",8))
+				if (!strncmp(buf,"steptime",8))
 				{
 						*nr=atoi(buf+9);
 						return 5;
@@ -883,6 +887,11 @@ int GetCMD(int *nr)
 						*nr=atoi(buf+9);
 						return 7;
 				}				
+				if (!strncmp(buf,"singlestep",10))
+				{
+						*nr=atoi(buf+11);
+						return 8;
+				}
 		}
 		
 		return -1;
@@ -897,6 +906,7 @@ void ProcesariFerestre(void *interfata)
 		char cbuc[40];
 		int nr=0,cmd;
 		char temp[10];
+		int i;
 		GPIO_InitTypeDef GPIO_InitStructure;
 		TM_PWM_TIM_t PWM_Data;
 
@@ -929,10 +939,10 @@ void ProcesariFerestre(void *interfata)
 							lauto->ChangeLabelBack(COLOR_DARK_GREEN);
 							lmanual->ChangeLabelBack(COLOR_BLACK);	
 							//activam PWM ca input pentru stepping la PA5
-							TM_PWM_InitTimer(TIM2, &PWM_Data, pwm_freq);
+							TM_PWM_InitTimer(TIM2, &PWM_Data, pwm_frecventa);
 							TM_PWM_InitChannel(TIM2, TM_PWM_Channel_1, TM_PWM_PinsPack_2);
-							TM_PWM_SetChannelPercent(TIM2, &PWM_Data, TM_PWM_Channel_1, pwm_facto);		
-							printf("Initialized: PWM ON PA5 - F=[%d Hz] Percent=[%d %%]\r\n",pwm_freq,pwm_facto);	  							
+							TM_PWM_SetChannelPercent(TIM2, &PWM_Data, TM_PWM_Channel_1, pwm_procent);		
+							printf("Initialized: PWM ON PA5 - F=[%d Hz] Percent=[%d %%]\r\n",pwm_frecventa,pwm_procent);	  							
 						break;
 					case 3:
 							lauto=(Label*)_gui->GetComponentByID(ID_LAB_step4,WINDOW_3);
@@ -994,16 +1004,37 @@ void ProcesariFerestre(void *interfata)
 							stepss= (Label*)_gui->GetComponentByID(ID_LAB_step2_nr,WINDOW_3);
 							sprintf(temp,"%d",nr);
 							stepss->ChangeLabel((char*)temp);
+							steptime=nr;
 						break;
 					case 6:
 							stepss= (Label*)_gui->GetComponentByID(ID_LAB_pwm_freq_nr,WINDOW_3);
 							sprintf(temp,"%d Hz",nr);
 							stepss->ChangeLabel((char*)temp);
+							pwm_frecventa=nr;
+							TM_PWM_InitTimer(TIM2, &PWM_Data, pwm_frecventa);
+							TM_PWM_InitChannel(TIM2, TM_PWM_Channel_1, TM_PWM_PinsPack_2);
+							TM_PWM_SetChannelPercent(TIM2, &PWM_Data, TM_PWM_Channel_1, pwm_procent);		
+							printf("Initialized: PWM ON PA5 - F=[%d Hz] Percent=[%d %%]\r\n",pwm_frecventa,pwm_procent);	  														
 						break;
 					case 7:
 							stepss= (Label*)_gui->GetComponentByID(ID_LAB_pwm_facto_nr,WINDOW_3);
 							sprintf(temp,"%d %%",nr);
-							stepss->ChangeLabel((char*)temp);							
+							stepss->ChangeLabel((char*)temp);			
+							pwm_procent=nr;
+							TM_PWM_InitTimer(TIM2, &PWM_Data, pwm_frecventa);
+							TM_PWM_InitChannel(TIM2, TM_PWM_Channel_1, TM_PWM_PinsPack_2);
+							TM_PWM_SetChannelPercent(TIM2, &PWM_Data, TM_PWM_Channel_1, pwm_procent);		
+							printf("Initialized: PWM ON PA5 - F=[%d Hz] Percent=[%d %%]\r\n",pwm_frecventa,pwm_procent);	  														
+						break;
+					case 8:		
+							printf("Make [%d] steps with steptime [%d]\r\n",nr,steptime);
+							for (i=0;i<nr;i++)
+							{
+								GPIO_SetBits(GPIOA , GPIO_Pin_5);									
+								Delay(steptime/2);
+								GPIO_ResetBits(GPIOA , GPIO_Pin_5);	
+								Delay(steptime/2);
+							}
 						break;
 				}
 		}		

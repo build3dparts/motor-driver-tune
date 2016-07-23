@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
 	char com_port[50];
 	int baud_rate, cmd;
-	char cmds[6][50] = { MOVE,STEP,STEP_R,STEP_S,PWM_FR,PWM_FA };
+	char cmds[7][50] = { MOVE,STEP,STEP_R,STEP_S,PWM_FR,PWM_FA,STEPIN };
 
 	if (argc != 5)
 	{

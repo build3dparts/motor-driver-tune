@@ -178,6 +178,7 @@ int main(void)
 {			    
 		RCC_ClocksTypeDef SYS_Clocks;
 		RCC_GetClocksFreq(&SYS_Clocks);	
+		GPIO_InitTypeDef GPIO_InitStructure;
 		TM_PWM_TIM_t PWM_Data;
 		
 		SystemInit();
@@ -186,7 +187,16 @@ int main(void)
     
 		UART_LowLevel_Init();
 		printf("Initialized: USART2, bps=262500, TX=PA2, RX=PA3\r\n");	  
-		//SysTick_Init();		
+
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;    
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+		GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+		GPIO_Init(GPIOA, &GPIO_InitStructure);							
+		GPIO_ResetBits(GPIOA , GPIO_Pin_5);	
+
 		/* Timer settings struct */				
 		//printf("Initialized: Green LED\r\n");	  
 		//TM_DISCO_LedInit();

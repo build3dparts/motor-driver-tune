@@ -15,9 +15,10 @@
 #define MOVE "dir:%s!"
 #define STEP "stepping:%s!"
 #define STEP_R "stepsrev:%s!"
-#define STEP_S "stepssec:%s!"
+#define STEP_S "steptime:%s!"
 #define PWM_FR "pwmfrequ:%s!"
 #define PWM_FA "pwmfacto:%s!"
+#define STEPIN "singlestep:%s!"
 
 extern char temp_cmd[50];
 #define SEND_CMD(cmd,param) {sprintf(temp_cmd,cmd,param);serial.Write(temp_cmd,strlen(temp_cmd));}

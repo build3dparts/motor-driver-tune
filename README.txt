@@ -12,6 +12,7 @@ For example you wold like to print at maximum speed when printing straight lines
 At the moment the project consists of 3 parts
 - Serial_Updater - a project developed with VC2015, which is a communication interface between an ARM processor and a GUI application
 - PC-Controller  - the GUI application which allows one to control and manually test a 3d printer motor driver 
+  Compiled with Delphi XE2
 - GUI-interface-STM32F407VG-discovery - a firmware for a discovery board STM32F407, which reads the commands from
   the PC-Controller and adjusts a PWM port along with the other connections to the motor driver
   the board also has a LCD module (3.2", with touchscreen) attached and initializes a serial terminal for debugging purpose

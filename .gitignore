@@ -1,0 +1,11 @@
+*.map
+*.lst
+*.axf
+*.d
+*.o
+*.tlog
+*.iobj
+PC-Controller/__history/
+GUI-interface-STM32F407VG-discovery/Project/Output/
+*.ipdb
+*.db
