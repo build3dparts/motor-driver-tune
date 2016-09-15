@@ -196,22 +196,34 @@ end;
 
 procedure TForm1.UpDown1Click(Sender: TObject; Button: TUDBtnType);
 begin
-  edit1.Text:=inttostr(UpDown1.Position);
+  case Button of
+    btNext: edit1.Text:=inttostr(strtoint(edit1.Text)+1);
+    btPrev: edit1.Text:=inttostr(strtoint(edit1.Text)-1);
+  end;
 end;
 
 procedure TForm1.UpDown2Click(Sender: TObject; Button: TUDBtnType);
 begin
-  edit2.Text:=inttostr(UpDown2.Position);
+  case Button of
+    btNext: edit2.Text:=inttostr(strtoint(edit2.Text)+1);
+    btPrev: edit2.Text:=inttostr(strtoint(edit2.Text)-1);
+  end;
 end;
 
 procedure TForm1.UpDown3Click(Sender: TObject; Button: TUDBtnType);
 begin
-  edit3.Text:=inttostr(UpDown3.Position);
+  case Button of
+    btNext: edit3.text:=inttostr(strtoint(edit3.Text)+1);
+    btPrev: edit3.text:=inttostr(strtoint(edit3.Text)-1);
+  end;
 end;
 
 procedure TForm1.UpDown4Click(Sender: TObject; Button: TUDBtnType);
 begin
-  edit4.Text:=inttostr(UpDown3.Position);
+  case Button of
+    btNext: edit4.Text:=inttostr(strtoint(edit4.Text)+1);
+    btPrev: edit4.Text:=inttostr(strtoint(edit4.Text)-1);
+  end;
 end;
 
 end.

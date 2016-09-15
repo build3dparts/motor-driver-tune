@@ -166,7 +166,7 @@ object Form1: TForm1
     Width = 39
     Height = 21
     TabOrder = 4
-    Text = '10'
+    Text = '10000'
     OnChange = Edit1Change
   end
   object UpDown2: TUpDown
@@ -185,7 +185,7 @@ object Form1: TForm1
     Width = 49
     Height = 21
     TabOrder = 6
-    Text = '30000'
+    Text = '100'
     OnChange = Edit2Change
   end
   object UpDown3: TUpDown
@@ -272,7 +272,7 @@ object Form1: TForm1
     Width = 38
     Height = 21
     TabOrder = 12
-    Text = '1'
+    Text = '50'
   end
   object UpDown4: TUpDown
     Left = 267

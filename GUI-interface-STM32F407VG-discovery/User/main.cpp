@@ -188,6 +188,7 @@ int main(void)
 		UART_LowLevel_Init();
 		printf("Initialized: USART2, bps=262500, TX=PA2, RX=PA3\r\n");	  
 
+		/*
 		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;    
 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
@@ -196,6 +197,7 @@ int main(void)
 		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 		GPIO_Init(GPIOA, &GPIO_InitStructure);							
 		GPIO_ResetBits(GPIOA , GPIO_Pin_5);	
+		*/
 
 		/* Timer settings struct */				
 		//printf("Initialized: Green LED\r\n");	  

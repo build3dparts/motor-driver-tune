@@ -76,6 +76,18 @@
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>255</CpuCode>
+      <Books>
+        <Book>
+          <Number>0</Number>
+          <Title>STM32F40x Data Sheet</Title>
+          <Path>$$Device:STM32F407VG$Documents\STM32F40x_DS.PDF</Path>
+        </Book>
+        <Book>
+          <Number>1</Number>
+          <Title>STM32F4 Series Reference Manual</Title>
+          <Path>$$Device:STM32F407VG$Documents\STM32F4xx_RM.pdf</Path>
+        </Book>
+      </Books>
       <DllOpt>
         <SimDllName>SARMCM3.DLL</SimDllName>
         <SimDllArguments>-REMAP -MPU</SimDllArguments>
@@ -241,10 +253,10 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>20</ColumnNumber>
+      <ColumnNumber>29</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>16</TopLine>
-      <CurrentLine>17</CurrentLine>
+      <TopLine>35</TopLine>
+      <CurrentLine>32</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\main.cpp</PathWithFileName>
       <FilenameWithoutPath>main.cpp</FilenameWithoutPath>
@@ -257,10 +269,10 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>1</ColumnNumber>
+      <ColumnNumber>19</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>307</TopLine>
-      <CurrentLine>330</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>29</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\pinout.cpp</PathWithFileName>
       <FilenameWithoutPath>pinout.cpp</FilenameWithoutPath>
@@ -617,10 +629,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>7</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>354</TopLine>
-      <CurrentLine>373</CurrentLine>
+      <TopLine>919</TopLine>
+      <CurrentLine>959</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\system_stm32f4xx.c</PathWithFileName>
       <FilenameWithoutPath>system_stm32f4xx.c</FilenameWithoutPath>
@@ -657,10 +669,10 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>29</ColumnNumber>
+      <ColumnNumber>81</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>2</CurrentLine>
+      <TopLine>25</TopLine>
+      <CurrentLine>65</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\TFTLCD\ssd1289.cpp</PathWithFileName>
       <FilenameWithoutPath>ssd1289.cpp</FilenameWithoutPath>
@@ -737,10 +749,10 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>52</ColumnNumber>
+      <ColumnNumber>15</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1000</TopLine>
-      <CurrentLine>1035</CurrentLine>
+      <TopLine>923</TopLine>
+      <CurrentLine>977</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\GUI\EventMethods.cpp</PathWithFileName>
       <FilenameWithoutPath>EventMethods.cpp</FilenameWithoutPath>
@@ -895,7 +907,7 @@
 
   <Group>
     <GroupName>Usart</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -905,10 +917,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>42</ColumnNumber>
+      <ColumnNumber>2</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>106</TopLine>
-      <CurrentLine>129</CurrentLine>
+      <TopLine>13</TopLine>
+      <CurrentLine>44</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\Usart\UARTLib.c</PathWithFileName>
       <FilenameWithoutPath>UARTLib.c</FilenameWithoutPath>
@@ -961,10 +973,10 @@
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>0</ColumnNumber>
+      <ColumnNumber>66</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>200</TopLine>
+      <CurrentLine>213</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\TMLibs\tm_stm32f4_pwm.cpp</PathWithFileName>
       <FilenameWithoutPath>tm_stm32f4_pwm.cpp</FilenameWithoutPath>

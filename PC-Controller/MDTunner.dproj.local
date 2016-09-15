@@ -2,11 +2,11 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2016/06/03 23:59:31.000.504,=C:\Users\Vlad\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2016/06/04 00:12:00.000.130,C:\Users\Vlad\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.dfm</Transaction>
-    <Transaction>2016/06/04 00:12:00.000.130,C:\Users\Vlad\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.pas</Transaction>
-    <Transaction>2016/06/04 00:12:56.000.493,C:\Users\Vlad\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Vlad\Documents\RAD Studio\Projects\MDTunner.dproj</Transaction>
-    <Transaction>2016/06/16 22:46:37.000.196,C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.pas=C:\Users\Vlad\Desktop\Driver-Tune-PC\MDTune.pas</Transaction>
-    <Transaction>2016/06/16 22:46:37.000.196,C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.dfm=C:\Users\Vlad\Desktop\Driver-Tune-PC\MDTune.dfm</Transaction>
-    <Transaction>2016/06/16 22:47:37.000.639,C:\Users\Vlad\Documents\RAD Studio\Projects\MDTunner.dproj=C:\Users\Vlad\Desktop\Driver-Tune-PC\MDTunner.dproj</Transaction>
+    <Transaction>2016/06/04 00:12:00.000.130,C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.dfm=C:\Users\Vlad\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2016/06/04 00:12:00.000.130,C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.pas=C:\Users\Vlad\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/06/04 00:12:56.000.493,C:\Users\Vlad\Documents\RAD Studio\Projects\MDTunner.dproj=C:\Users\Vlad\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2016/06/16 22:46:37.000.196,C:\Users\Vlad\Desktop\Driver-Tune-PC\MDTune.dfm=C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.dfm</Transaction>
+    <Transaction>2016/06/16 22:46:37.000.196,C:\Users\Vlad\Desktop\Driver-Tune-PC\MDTune.pas=C:\Users\Vlad\Documents\RAD Studio\Projects\MDTune.pas</Transaction>
+    <Transaction>2016/06/16 22:47:37.000.639,C:\Users\Vlad\Desktop\Driver-Tune-PC\MDTunner.dproj=C:\Users\Vlad\Documents\RAD Studio\Projects\MDTunner.dproj</Transaction>
   </Transactions>
 </BorlandProject>
