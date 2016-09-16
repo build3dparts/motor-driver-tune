@@ -139,8 +139,8 @@ object Form1: TForm1
       Caption = '3200'
     end
     object TrackBar1: TTrackBar
-      Left = 21
-      Top = 25
+      Left = 22
+      Top = 24
       Width = 254
       Height = 37
       LineSize = 3
@@ -166,7 +166,7 @@ object Form1: TForm1
     Width = 39
     Height = 21
     TabOrder = 4
-    Text = '10000'
+    Text = '5000'
     OnChange = Edit1Change
   end
   object UpDown2: TUpDown
@@ -180,7 +180,7 @@ object Form1: TForm1
     OnClick = UpDown2Click
   end
   object Edit2: TEdit
-    Left = 75
+    Left = 76
     Top = 178
     Width = 49
     Height = 21
@@ -256,6 +256,8 @@ object Form1: TForm1
     Lines.Strings = (
       'Memo1')
     TabOrder = 10
+    OnKeyDown = Memo1KeyDown
+    OnKeyPress = Memo1KeyPress
   end
   object Button6: TButton
     Left = 303
@@ -272,7 +274,7 @@ object Form1: TForm1
     Width = 38
     Height = 21
     TabOrder = 12
-    Text = '50'
+    Text = '200'
   end
   object UpDown4: TUpDown
     Left = 267

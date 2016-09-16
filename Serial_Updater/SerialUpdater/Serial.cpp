@@ -170,6 +170,8 @@ HRESULT CSyncSerialComm::Write(const char *pszBuf, DWORD dwSize)
 			break;
 		}
 	}
+	if (hResult == S_OK)
+		printf("CMD: [%s]",pszBuf);
 	return hResult;
 }
 

@@ -16,7 +16,6 @@ type
     Button4: TButton;
     Button5: TButton;
     GroupBox3: TGroupBox;
-    TrackBar1: TTrackBar;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -40,6 +39,7 @@ type
     Edit4: TEdit;
     Label10: TLabel;
     UpDown4: TUpDown;
+    TrackBar1: TTrackBar;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -54,6 +54,9 @@ type
     procedure UpDown4Click(Sender: TObject; Button: TUDBtnType);
     procedure Button6Click(Sender: TObject);
     procedure Edit3Change(Sender: TObject);
+    procedure CaptureConsoleOutput(DosApp : string;params : string;AMemo : Tstrings; App:Tapplication);
+    procedure Memo1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Memo1KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -62,10 +65,97 @@ type
 
 var
   Form1: TForm1;
+  mauto: boolean;
 
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.CaptureConsoleOutput(DosApp : string;params : string;AMemo : Tstrings; App:Tapplication);
+const
+  ReadBuffer = 1048576;  // 1 MB Buffer
+var
+  Security            : TSecurityAttributes;
+  ReadPipe,WritePipe  : THandle;
+  start               : TStartUpInfo;
+  ProcessInfo         : TProcessInformation;
+  Buffer              : PAnsiChar;
+  TotalBytesRead,
+  BytesRead           : DWORD;
+  Apprunning,n,
+  BytesLeftThisMessage,
+  TotalBytesAvail : integer;
+  CommandLine         : string;
+  lines               : string;
+  position            : integer;
+  flags               : cardinal;
+begin
+  with Security do
+  begin
+    nlength              := SizeOf(TSecurityAttributes);
+    binherithandle       := true;
+    lpsecuritydescriptor := nil;
+  end;
+
+  if CreatePipe (ReadPipe, WritePipe, @Security, 0) then
+  begin
+    // Redirect In- and Output through STARTUPINFO structure
+
+    Buffer  := AllocMem(ReadBuffer + 1);
+    FillChar(Start,Sizeof(Start),#0);
+    start.cb          := SizeOf(start);
+    start.hStdOutput  := WritePipe;
+    start.hStdInput   := ReadPipe;
+    start.dwFlags     := STARTF_USESTDHANDLES + STARTF_USESHOWWINDOW;
+    start.wShowWindow := SW_HIDE;
+    start.hStdError   := WritePipe;
+
+    // Create a Console Child Process with redirected input and output
+    FmtStr(CommandLine, '"%s" %s', [DosApp, params]);
+
+    if CreateProcess(nil      ,PChar(CommandLine),
+                     @Security,@Security,
+                     true     ,CREATE_NO_WINDOW or NORMAL_PRIORITY_CLASS,
+                     nil      ,nil,
+                     start    ,ProcessInfo) then
+    begin
+      n:=0;
+      TotalBytesRead:=0;
+      repeat
+        // Increase counter to prevent an endless loop if the process is dead
+        Inc(n,1);
+
+        // wait for end of child process
+        Apprunning := WaitForSingleObject(ProcessInfo.hProcess,100);
+        App.ProcessMessages;
+
+        // it is important to read from time to time the output information
+        // so that the pipe is not blocked by an overflow. New information
+        // can be written from the console app to the pipe only if there is
+        // enough buffer space.
+
+        if not PeekNamedPipe(ReadPipe        ,@Buffer[TotalBytesRead],
+                             ReadBuffer      ,@BytesRead,
+                             @TotalBytesAvail,@BytesLeftThisMessage) then
+                             break
+        else
+        if BytesRead > 0 then
+          ReadFile(ReadPipe,Buffer[TotalBytesRead],BytesRead,BytesRead,nil);
+        TotalBytesRead:=TotalBytesRead+BytesRead;
+      until (Apprunning <> WAIT_TIMEOUT) or (n > 150);
+
+      Buffer[TotalBytesRead]:= #0;
+      lines:=strpas(Buffer);
+      if lines<>'' then
+        AMemo.Add(lines);
+    end;
+    FreeMem(Buffer);
+    CloseHandle(ProcessInfo.hProcess);
+    CloseHandle(ProcessInfo.hThread);
+    CloseHandle(ReadPipe);
+    CloseHandle(WritePipe);
+  end;
+end;
 
 function RunProcess(FileName: string; ShowCmd: DWORD; wait: Boolean; ProcID:
   PDWORD): Longword;
@@ -100,74 +190,43 @@ begin
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  ProcID := 0;
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 0 L';
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 0 L',memo1.Lines,Application);
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  ProcID := 0;
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 0 R';
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 0 R',memo1.Lines,Application);
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  ProcID := 0;
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 1 A';
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 1 A',memo1.Lines,Application);
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  ProcID := 0;
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 1 M';
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 1 M',memo1.Lines,Application);
 end;
 
 procedure TForm1.Button6Click(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 6 ' + edit4.text;
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 6 '+edit4.Text,memo1.Lines,Application);
 end;
 
 procedure TForm1.Edit1Change(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  ProcID := 0;
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 3 '+edit1.Text;
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 3 '+edit1.Text,memo1.Lines,Application);
 end;
 
 procedure TForm1.Edit2Change(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  ProcID := 0;
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 4 '+edit2.Text;
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 4 '+edit2.text,memo1.Lines,Application);
 end;
 
 procedure TForm1.Edit3Change(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
 begin
-  ProcID := 0;
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 5 '+edit3.Text;
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 5 '+edit3.text,memo1.Lines,Application);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -177,21 +236,51 @@ begin
   memo1.ReadOnly:=true;
   ComboBox1.ItemIndex:=6;
   TrackBar1.Position:=0;
+  mauto:=false;
+end;
+
+procedure TForm1.Memo1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if ssCtrl in Shift then
+  begin
+    case Key of
+      VK_RIGHT:  if TrackBar1.Position < 4 then TrackBar1.Position:=TrackBar1.Position+1;
+      VK_LEFT: if TrackBar1.Position > 0 then TrackBar1.Position:=TrackBar1.Position-1;
+    end;
+  end
+  else
+  begin
+    case Key of
+      VK_LEFT:  Button1Click(self);
+      VK_RIGHT: Button2Click(self);
+      VK_UP:    Edit2.Text:=inttostr(StrToInt(Edit2.Text)+50);
+      VK_DOWN:  if strtoint(edit2.Text)>0 then Edit2.Text:=inttostr(StrToInt(Edit2.Text)-50);
+      VK_RETURN:if mauto=false then Button6Click(self);
+    end;
+  end;
+end;
+
+procedure TForm1.Memo1KeyPress(Sender: TObject; var Key: Char);
+var bCtrl: Boolean;
+begin
+  //bCtrl := GetKeyState(VK_LCONTROL) <> 0;
+  //if bCtrl then
+  case Key of
+    'a': begin Button4Click(self);mauto:=true;end;
+    'm': begin Button5Click(self);mauto:=false;end;
+  end;
+  Key := #0;
 end;
 
 procedure TForm1.TrackBar1Change(Sender: TObject);
-var ProcID: Cardinal;
-    cmd:string;
-    data:array[0..4] of string;
+var data:array[0..4] of string;
 begin
-  ProcID := 0;
   data[0]:='200';
   data[1]:='400';
   data[2]:='800';
   data[3]:='1600';
   data[4]:='3200';
-  cmd:='serial-update.exe '+labelededit1.Text+' '+ComboBox1.Text+' 2 '+data[TrackBar1.Position];
-  RunProcess(cmd, SW_HIDE, TRUE, @ProcID);
+  CaptureConsoleOutput('serial-update.exe',labelededit1.Text+' '+ComboBox1.Text+' 2 '+data[TrackBar1.Position],memo1.Lines,Application);
 end;
 
 procedure TForm1.UpDown1Click(Sender: TObject; Button: TUDBtnType);
