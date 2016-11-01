@@ -88,23 +88,23 @@ void InitWindow(GUI *gui,int window)
             break;
         case WINDOW_1:                                
                 //init fereastra 1 - manual config
-                GUIComponent *label_testare=new Label(lcd,NULL,0,0,319,40,"Configurare Manuala",(font_t*)&TerminusBigFont,COLOR_WHITE,COLOR_LIGHT_GRAY,ID_TITLE_MANUAL);								
+                GUIComponent *label_testare=new Label(lcd,NULL,0,0,319,40,"Configurare Manuala",(font_t*)&TerminusBigFont,COLOR_BLACK,COLOR_LIGHT_GRAY,ID_TITLE_MANUAL);								
 								GUIComponent *conf_win=new Button(lcd,configs,275,45,40,145,">",(font_t*)&TerminusBigFont,COLOR_PINK,ID_CONFIG_WIN);
 								
-								GUIComponent *PWM_enable=new Button(lcd,enpwm,5,45,72,32,"PWM-ON",(font_t*)&Font8x16,COLOR_YELLOW,ID_EN_PWM);
-								GUIComponent *PWM_disable=new Button(lcd,dispwm,5,82,72,32,"PWM-OFF",(font_t*)&Font8x16,COLOR_YELLOW,ID_DIS_PWM);
-								GUIComponent *DRV_enable=new Button(lcd,endrv,5,119,72,32,"DRV-HI",(font_t*)&Font8x16,COLOR_LIME,ID_EN_DRV);
-								GUIComponent *DRV_disable=new Button(lcd,disdrv,5,156,72,32,"DRV-LO",(font_t*)&Font8x16,COLOR_LIME,ID_DIS_DRV);
-								
-								GUIComponent *RST_enable=new Button(lcd,enrst,82,45,72,32,"RST-HI",(font_t*)&Font8x16,COLOR_VIOLET,ID_EN_RST);
-								GUIComponent *RST_disable=new Button(lcd,disrst,82,82,72,32,"RST-LO",(font_t*)&Font8x16,COLOR_VIOLET ,ID_DIS_RST);
-								GUIComponent *SLP_enable=new Button(lcd,enslp,82,119,72,32,"SLP-HI",(font_t*)&Font8x16,COLOR_ORANGE,ID_EN_SLP);
-								GUIComponent *SLP_disable=new Button(lcd,disslp,82,156,72,32,"SLP-LO",(font_t*)&Font8x16,COLOR_ORANGE,ID_DIS_SLP);								
-								
-								GUIComponent *single_step=new Button(lcd,onestep,159,45,111,32,"ONE-STEP",(font_t*)&Font8x16,COLOR_LIGHT_GRAY,ID_ONE_STEP);								
+								GUIComponent *PWM_enable=new Button(lcd,enpwm,5,45,72,32,"Auto",(font_t*)&Font8x16,COLOR_YELLOW,ID_EN_PWM);
+								GUIComponent *PWM_disable=new Button(lcd,dispwm,5,82,72,32,"Manual",(font_t*)&Font8x16,COLOR_YELLOW,ID_DIS_PWM);
+								GUIComponent *DRV_enable=new Button(lcd,endrv,5,119,72,32,"Enable",(font_t*)&Font8x16,COLOR_LIME,ID_EN_DRV);
+								GUIComponent *DRV_disable=new Button(lcd,disdrv,5,156,72,32,"Disable",(font_t*)&Font8x16,COLOR_LIME,ID_DIS_DRV);
+												
+								GUIComponent *single_step=new Button(lcd,onestep,159,45,111,32,"STEP",(font_t*)&Font8x16,COLOR_LIGHT_GRAY,ID_ONE_STEP);								
 								GUIComponent *inc_speed=new Button(lcd,incspeed,159,82,111,32,"SPEED++",(font_t*)&Font8x16,COLOR_WHITE,ID_STEP_INC);								
 								GUIComponent *dec_speed=new Button(lcd,decspeed,159,119,111,32,"SPEED--",(font_t*)&Font8x16,COLOR_WHITE,ID_STEP_DEC);								
-								GUIComponent *dir=new Button(lcd,direction,159,156,111,32,"L/R",(font_t*)&Font8x16,COLOR_WHITE,ID_STEP_DIR);								
+								GUIComponent *dir=new Button(lcd,direction,159,156,111,32,"Left/Right",(font_t*)&Font8x16,COLOR_WHITE,ID_STEP_DIR);		
+
+								GUIComponent *label_speed=new Label(lcd,NULL,82,45,72,32,"100",(font_t*)&Font8x16,COLOR_WHITE,COLOR_ORANGE,ID_LAB_speed,_CENTER);
+								GUIComponent *label_dir4=new Label(lcd,NULL,82,82,72,32,"Left",(font_t*)&Font8x16,COLOR_WHITE,COLOR_ORANGE,ID_LAB_dir4,_CENTER);
+								GUIComponent *label_mode=new Label(lcd,NULL,82,119,72,32,"Auto",(font_t*)&Font8x16,COLOR_WHITE,COLOR_ORANGE,ID_LAB_mode,_CENTER);
+								GUIComponent *label_stepping=new Label(lcd,NULL,82,156,72,32,"200",(font_t*)&Font8x16,COLOR_WHITE,COLOR_ORANGE,ID_LAB_stepping,_CENTER);
 								
                 GUIComponent *test_back=new Button(lcd,testare_back,85,195,150,35,"REVENIRE",(font_t*)&TerminusBigFont,COLOR_LIGHT_RED,ID_BUT_RENUNTA1);								
 
@@ -114,29 +114,39 @@ void InitWindow(GUI *gui,int window)
 								gui->AddComponent(PWM_disable,WINDOW_1);
 								gui->AddComponent(DRV_disable,WINDOW_1);
 								gui->AddComponent(DRV_enable,WINDOW_1);		
-								gui->AddComponent(RST_enable,WINDOW_1);
-								gui->AddComponent(RST_disable,WINDOW_1);
-								gui->AddComponent(SLP_disable,WINDOW_1);
-								gui->AddComponent(SLP_enable,WINDOW_1);	
 								gui->AddComponent(single_step,WINDOW_1);	
 								gui->AddComponent(inc_speed,WINDOW_1);	
 								gui->AddComponent(dec_speed,WINDOW_1);	
 								gui->AddComponent(dir,WINDOW_1);
 								gui->AddComponent(test_back,WINDOW_1);
+								gui->AddComponent(label_speed,WINDOW_1);
+								gui->AddComponent(label_dir4,WINDOW_1);
+								gui->AddComponent(label_mode,WINDOW_1);
+								gui->AddComponent(label_stepping,WINDOW_1);
             break;
         case WINDOW_2:                         
                 //init fereastra 2 - help config
-                GUIComponent *label_testare2=new Label(lcd,NULL,0,0,319,40,"Configurare Manuala",(font_t*)&TerminusBigFont,COLOR_WHITE,COLOR_LIGHT_GRAY,ID_TITLE_MANUAL2);								
+                GUIComponent *label_testare2=new Label(lcd,NULL,0,0,319,40,"Configurare Manuala",(font_t*)&TerminusBigFont,COLOR_BLACK,COLOR_LIGHT_GRAY,ID_TITLE_MANUAL2);								
 								GUIComponent *conf_win2=new Button(lcd,configs2,5,45,40,145,"<",(font_t*)&TerminusBigFont,COLOR_PINK,ID_CONFIG_WIN2);
 								
 								GUIComponent *test_back2=new Button(lcd,testare_back2,85,195,150,35,"REVENIRE",(font_t*)&TerminusBigFont,COLOR_LIGHT_RED,ID_BUT_RENUNTA2);								
 								
-								GUIComponent *slider_pwm_freq = new Slider(lcd,slide_event,50,45,200,30,10,500,50,(font_t*)&Font8x16,COLOR_BLUE,ID_SLIDER);								
+								GUIComponent *label_tit_steps=new Label(lcd,NULL,50,45,260,17,"Steps / Revolution",(font_t*)&Font8x16,COLOR_BLACK,COLOR_WHITE,ID_LAB_srev,_CENTER);
+								GUIComponent *Step_200=new Button(lcd,s200,50,65,50,32,"200",(font_t*)&Font8x16,COLOR_YELLOW,ID_S200);
+								GUIComponent *Step_400=new Button(lcd,s400,103,65,50,32,"400",(font_t*)&Font8x16,COLOR_YELLOW,ID_S400);
+								GUIComponent *Step_800=new Button(lcd,s800,156,65,50,32,"800",(font_t*)&Font8x16,COLOR_YELLOW,ID_S800);
+								GUIComponent *Step_1600=new Button(lcd,s1600,209,65,50,32,"1600",(font_t*)&Font8x16,COLOR_YELLOW,ID_S1600);
+								GUIComponent *Step_3200=new Button(lcd,s3200,262,65,50,32,"3200",(font_t*)&Font8x16,COLOR_YELLOW,ID_S3200);								
 								
 								gui->AddComponent(label_testare2,WINDOW_2);
 								gui->AddComponent(conf_win2,WINDOW_2);
 								gui->AddComponent(test_back2,WINDOW_2);
-								gui->AddComponent(slider_pwm_freq,WINDOW_2);
+								gui->AddComponent(Step_200,WINDOW_2);				
+								gui->AddComponent(Step_400,WINDOW_2);				
+								gui->AddComponent(Step_800,WINDOW_2);				
+								gui->AddComponent(Step_1600,WINDOW_2);				
+								gui->AddComponent(Step_3200,WINDOW_2);									
+								gui->AddComponent(label_tit_steps,WINDOW_2);	
 						break;
         case WINDOW_3:                  
                 //init fereastra 3 - PLAY LIVE
@@ -160,7 +170,7 @@ void InitWindow(GUI *gui,int window)
 								GUIComponent *pwm_facto=new Label(lcd,NULL,10,145,88,16,"PWM %:     ",(font_t*)&Font8x16,COLOR_BLACK,COLOR_CYAN,ID_LAB_pwm_facto,_LEFT);																
 								GUIComponent *steps_sec_nr=new Label(lcd,NULL,98,105,60,16,"100",(font_t*)&Font8x16,COLOR_BLACK,COLOR_CYAN,ID_LAB_step2_nr,_LEFT);								
 								GUIComponent *pwm_freq_nr=new Label(lcd,NULL,98,125,88,16, "200 Hz",(font_t*)&Font8x16,COLOR_BLACK,COLOR_CYAN,ID_LAB_pwm_freq_nr,_LEFT);								
-								GUIComponent *pwm_facto_nr=new Label(lcd,NULL,98,145,88,16,"50 %",(font_t*)&Font8x16,COLOR_BLACK,COLOR_CYAN,ID_LAB_pwm_facto_nr,_LEFT);								
+								GUIComponent *pwm_facto_nr=new Label(lcd,NULL,98,145,88,16,"50 %",(font_t*)&Font8x16,COLOR_BLACK,COLOR_CYAN,ID_LAB_pwm_facto_nr,_LEFT);											
 								
 								
                 gui->AddComponent(label_auto3,WINDOW_3);  
@@ -542,30 +552,6 @@ void disdrv(void *interfata)
     _gui->TranzitFereastra(WINDOW_1,WINDOW_0);      
 }
 
-void enrst(void *interfata)
-{
-    GUI *_gui=((GUI_PACKET*)interfata)->gui;    
-    _gui->TranzitFereastra(WINDOW_1,WINDOW_0);      
-}
-
-void disrst(void *interfata)
-{
-    GUI *_gui=((GUI_PACKET*)interfata)->gui;    
-    _gui->TranzitFereastra(WINDOW_1,WINDOW_0);      
-}
-
-void enslp(void *interfata)
-{
-    GUI *_gui=((GUI_PACKET*)interfata)->gui;    
-    _gui->TranzitFereastra(WINDOW_1,WINDOW_0);      
-}
-
-void disslp(void *interfata)
-{
-    GUI *_gui=((GUI_PACKET*)interfata)->gui;    
-    _gui->TranzitFereastra(WINDOW_1,WINDOW_0);      
-}
-
 void onestep(void *interfata)
 {
     GUI *_gui=((GUI_PACKET*)interfata)->gui;    
@@ -798,6 +784,31 @@ void refuza_parola_noua(void *interfata)
     _gui->TranzitFereastra(WINDOW_8,WINDOW_5);   
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------
+
+void s200(void *interfata)
+{
+	
+}
+
+void s400(void *interfata)
+{
+	
+}
+
+void s800(void *interfata)
+{
+	
+}
+
+void s1600(void *interfata)
+{
+	
+}
+
+void s3200(void *interfata)
+{
+	
+}
 
 int get_val_index(int val,int *vector)
 {

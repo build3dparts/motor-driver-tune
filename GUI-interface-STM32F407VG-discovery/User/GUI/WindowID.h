@@ -53,6 +53,10 @@
 #define ID_STEP_INC						 218
 #define ID_STEP_DEC						 219
 #define ID_STEP_DIR						 220
+#define ID_LAB_speed           221
+#define ID_LAB_dir4            222
+#define ID_LAB_mode						 223
+#define ID_LAB_stepping        224
 
 #define ID_TITLE_MANUAL2			 250
 #define ID_CONFIG_WIN2				 251
@@ -65,6 +69,12 @@
 #define ID_BUT_ACCEPTA2 302
 #define ID_BUT_RENUNTA2 303
 #define ID_BUT_FIRSTC2  304
+#define ID_S200         305
+#define ID_S400         306
+#define ID_S800         307
+#define ID_S1600        308
+#define ID_S3200        309
+#define ID_LAB_srev     310
 
 //window 4
 #define ID_LAB_SIM  		 400

@@ -90,6 +90,12 @@ void back_from_touch(void *interfata);
 void back_from_vd(void *interfata);
 void back_from_vs(void *interfata);
 
+void s200(void *interfata);
+void s400(void *interfata);
+void s800(void *interfata);
+void s1600(void *interfata);
+void s3200(void *interfata);
+
 void ProcesariFerestre(void *data);
 
 
